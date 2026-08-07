@@ -1,0 +1,72 @@
+version: "4.1"
+name: 89c52_sdcc_demo
+type: C51
+deviceName: null
+packDir: null
+srcDirs:
+  - src
+virtualFolder:
+  name: <virtual_root>
+  files: []
+  folders: []
+dependenceList: []
+outDir: build
+miscInfo:
+  uid: 831662ee7b801c5951d126a9eb0d193d
+targets:
+  Debug:
+    cppPreprocessAttrs:
+      defineList: []
+      incList:
+        - inc
+      libList: []
+    excludeList: []
+    settings:
+      debugger: unknown
+    toolchain: GNU_SDCC_MCS51
+    toolchainConfigMap:
+      GNU_SDCC_MCS51:
+        linkerScript: "null"
+        options:
+          version: 1
+          afterBuildTasks: []
+          asm-compiler: {}
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            language-c: c2x
+          global:
+            code-size: "8192"
+            iram-size: "128"
+            mem-model: small
+            optimize-type: speed
+            xram-size: "0"
+          linker:
+            output-format: elf
+            remove-unused-input-sections: true
+      SDCC:
+        options:
+          version: 3
+          afterBuildTasks: []
+          asm-compiler: {}
+          beforeBuildTasks: []
+          c/cpp-compiler:
+            language-c: c99
+          global:
+            device: mcs51
+            misc-controls: --iram-size 256 --xram-size 0 --code-size 8192 --stack-auto
+            optimize-type: speed
+          linker:
+            $mainFileName: main
+            misc-controls: --nooverlay
+            output-format: hex
+    uploadConfigMap:
+      Custom:
+        bin: ""
+        commandLine: python ./tools/stcflash.py -p /dev/ttyACM0 "${hexFile}"
+        eraseChipCommand: ""
+      stcgal:
+        bin: ""
+        eepromImgPath: "null"
+        extraOptions: -b 9600
+        options: .eide/stc.flash.json
+    uploader: stcgal
